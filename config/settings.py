@@ -34,7 +34,7 @@ INSTALLED_APPS = [
     'drf_yasg',
     'corsheaders',
     'django_celery_beat',
-    # 'bot',
+
 ]
 
 REST_FRAMEWORK = {
@@ -195,7 +195,7 @@ CELERY_TASK_TIME_LIMIT = 30 * 60
 
 CELERY_BEAT_SCHEDULE = {
      'task-name': {
-         'task': 'books.tasks.check_last_visit',  # Путь к задаче
+         'task': 'book.tasks.check_last_visit',  # Путь к задаче
          'schedule': timedelta(days=30),
      },
 }

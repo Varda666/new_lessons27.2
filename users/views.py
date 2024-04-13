@@ -3,7 +3,7 @@ from rest_framework.generics import (CreateAPIView, UpdateAPIView,
                                      RetrieveAPIView, DestroyAPIView)
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from users.models import User
-from books.permissions import IsOwner
+from book.permissions import IsOwner
 from users.serializers import UserSerializer
 
 
