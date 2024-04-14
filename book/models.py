@@ -1,5 +1,7 @@
 from django.db import models
-from validators import valid_author
+
+import book.validators
+from book.validators import *
 
 
 # Create your models here.
@@ -22,7 +24,7 @@ class Book(models.Model):
         verbose_name='жанр',
     )
     author = models.CharField(
-        max_length=150, verbose_name='автор', validators=valid_author,
+        max_length=150, verbose_name='автор', validators=[book.validators.valid_author],
     )
     cost = models.IntegerField(
         verbose_name='стоимость'

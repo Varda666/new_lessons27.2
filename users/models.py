@@ -30,6 +30,9 @@ class User(AbstractUser):
     is_active = models.BooleanField(
         default=True, verbose_name="статус активности"
     )
+    is_superuser = models.BooleanField(
+        default=False, verbose_name="суперпользователь"
+    )
 
     objects = MyUserManager()
 

@@ -1,7 +1,7 @@
 from rest_framework import serializers
 
 from book.models import Book
-from book.validators import valid_duration
+
 
 
 class BookSerializer(serializers.ModelSerializer):

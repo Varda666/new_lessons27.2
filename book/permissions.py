@@ -1,12 +1,12 @@
 from rest_framework.permissions import BasePermission
 
 
-class IsModerator(BasePermission):
+class IsAdminUser(BasePermission):
 
     def has_permission(self, request, view):
         if request.user.is_superuser:
             return True
-        elif request.user.user_role == 'moderator':
+        elif request.user.user_role == 'admin':
             return True
         return False
 
@@ -21,11 +21,10 @@ class IsModerator(BasePermission):
 #         else:
 #             return False
 #
-#
-# class IsOwner(BasePermission):
-#     def has_object_permission(self, request, view, obj):
-#         if request.user == obj.owner:
-#             return True
-#         else:
-#             return False
+class IsOwner(BasePermission):
+    def has_object_permission(self, request, view, obj):
+        if request.user == obj.owner:
+            return True
+        else:
+            return False
 

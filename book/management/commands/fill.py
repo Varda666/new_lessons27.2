@@ -1,6 +1,7 @@
 from django.core.management import BaseCommand
+from django.utils.timezone import now
 
-from book.models import Habit
+from book.models import Book
 from users.models import User
 
 
@@ -11,14 +12,15 @@ class Command(BaseCommand):
 
 
         user1, _ = User.objects.get_or_create(email='admin1@mail.ru', defaults={
+            'user_role': 'admin',
             'name': 'Admin',
-            'last_name': 'Ivanov',
+            'last_login': now,
             'is_superuser': True,
             'is_staff': True,
             'is_active': True
              })
 
-        habit_list1 = [
+        book_list1 = [
             {'owner': user1,
              'place': 'Любое',
              'time': 'Любое',
