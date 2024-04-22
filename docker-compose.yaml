@@ -1,0 +1,50 @@
+version: "3"
+
+services:
+  db:
+    image: postgres
+    env_file:
+      - .env
+    environment:
+      POSTGRES_USER: 'postgres'
+      POSTGRES_PASSWORD: 'Varda141190'
+      POSTGRES_DB: 'postgres'
+      PGDATA: /var/lib/postgresql/data
+
+  app:
+    build: .
+    tty: true
+    command: python manage.py runserver 0.0.0.0:8000
+    ports:
+      - '8000:8000'
+    depends_on:
+      - db
+      - redis
+
+  redis:
+    image: redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - /path/to/local/dаta:/root/redis
+      - /path/to/local/redis.conf:/usr/local/etc/redis/redis.conf
+    environment:
+      - REDIS_PASSWORD=my-password
+      - REDIS_PORT=6379
+      - REDIS_DATABASES=16
+
+  celery:
+    build: .
+    command: celery -A config worker -l INFO
+    tty: true
+    depends_on:
+      - app
+      - redis
+
+  celery_beat:
+    build: .
+    command: celery -A config beat -l INFO -S django
+    tty: true
+    depends_on:
+      - app
+      - redis

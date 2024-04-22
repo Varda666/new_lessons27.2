@@ -95,7 +95,7 @@ WSGI_APPLICATION = 'config.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'db_books',
+        'NAME': 'postgres',
             # os.getenv('DB_NAME'),
         'USER': 'postgres',
             # os.getenv('DB_USER'),
@@ -166,7 +166,10 @@ CACHE_ENABLED = os.getenv('CACHE_ENABLED') == "True"
 CACHES = {
     "default": {
         "BACKEND": "django.core.cache.backends.redis.RedisCache",
-        "LOCATION": os.getenv('CACHE_LOCATION'),
+        "LOCATION": "redis://127.0.0.1:6379",
+        "REDIS_PASSWORD": "my-password",
+        "REDIS_PORT": "6379",
+        "REDIS_DATABASES": "16",
     }
 }
 
@@ -184,7 +187,7 @@ CORS_ALLOW_ALL_ORIGINS = False
 
 
 # URL-адрес брокера сообщений
-CELERY_BROKER_URL = 'redis://127.0.0.1:6379'
+CELERY_BROKER_URL = 'redis://redis:6379/0'
 
 # URL-адрес брокера результатов, также Redis
 CELERY_RESULT_BACKEND = 'redis://127.0.0.1:6379'
