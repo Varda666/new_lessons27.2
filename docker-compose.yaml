@@ -3,12 +3,10 @@ version: "3"
 services:
   db:
     image: postgres
+    container_name: db
     env_file:
       - .env
     environment:
-      POSTGRES_USER: 'postgres'
-      POSTGRES_PASSWORD: 'Varda141190'
-      POSTGRES_DB: 'postgres'
       PGDATA: /var/lib/postgresql/data
 
   app:
@@ -23,6 +21,7 @@ services:
 
   redis:
     image: redis
+    container_name: redis
     ports:
       - "6379:6379"
     volumes:
